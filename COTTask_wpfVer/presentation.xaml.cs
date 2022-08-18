@@ -232,6 +232,8 @@ namespace COTTask_wpf
         readonly bool AudioFeedbackNeeded = false;
         readonly bool SaveSummaryofExpNeeded = false;
 
+        int t_flashMS = 200;
+
         /*****Methods*******/
         public presentation(MainWindow mainWindow)
         {
@@ -247,7 +249,8 @@ namespace COTTask_wpf
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {//  Called by Window.show() at the first time
-            //WindowState = WindowState.Maximized;
+            
+            WindowState = WindowState.Maximized;
 
 
             if(parent.IO8Used) // Create Serial port 
@@ -344,6 +347,8 @@ namespace COTTask_wpf
 
         public void Prepare_bef_Present()
         {
+
+
             if(parent.IO8Used)
             {// create a serial Port IO8 instance, and open it
                 serialPort_IO8 = new SerialPort();
@@ -441,36 +446,48 @@ namespace COTTask_wpf
 
 
 
-        private void Show_Flash()
-        {
-            int i = 1;
-            PresentTrial = true;
-            while (PresentTrial && i < 10000000)
-            {
-                myGrid.Background = brush_BKTargetShown;
-                i++;
-            }
-            myGrid.Background = brush_BDWaitTrialStart;
-        }
 
 
         public async void Present_Start2()
         {
             myGrid.Background = brush_BKReady;
-            PresentTrial = true;
-            int i = 1;
-            while(PresentTrial && i < 10)
-            {
-                myGrid.Background = brush_BKTargetShown;
-                await Task.Delay(200);
-                myGrid.Background = brush_BKReady;
-                await Task.Delay(200);
-                
 
-                i++;
+            Modify_GoCircle(parent.optPostions_OCenter_List[0]);
+
+            PresentTrial = true;
+            while(PresentTrial)
+            {
+                circleGo.Visibility = Visibility.Visible;
+                await Task.Delay(t_flashMS);
+                circleGo.Visibility = Visibility.Hidden;
+                await Task.Delay(t_flashMS);
             }
             
         }
+
+
+        private void Modify_GoCircle(int[] cPoint_Pos_OCenter)
+        {/*
+            Show the GoCircle into cPoint_Pos_OCenter (Origin in the center of the Screen)
+
+            Arg:
+                cPoint_Pos_OCenter: the x, y Positions of the Circle center in Pixal (Origin in the center of the Screen)
+
+             */
+
+            // Change the cPoint  into Top Left Coordinate System
+            sd.Rectangle Rect_touchScreen = Utility.Detect_PrimaryScreen_Rect();
+            int[] cPoint_Pos_OTopLeft = new int[] { cPoint_Pos_OCenter[0] + Rect_touchScreen.Width / 2, cPoint_Pos_OCenter[1] + Rect_touchScreen.Height / 2 };
+
+
+            circleGo = Utility.Move_Circle_OTopLeft(circleGo, cPoint_Pos_OTopLeft);
+            circleGo.Fill = brush_goCircleFill;
+            circleGo.Stroke = brush_goCircleFill;
+            circleGo.IsEnabled = false;
+            myGrid.UpdateLayout();
+        }
+
+
 
         public async void Present_Start()
         {   
