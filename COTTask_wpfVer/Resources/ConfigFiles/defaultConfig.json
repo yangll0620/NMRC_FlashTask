@@ -14,40 +14,8 @@
   },
   "Target": {
     "Target Diameter (cm)": 8.0,
-    "Target No of Positions": 9,
+    "Target No of Positions": 1,
     "optPostions_OCenter_List": [
-      [
-        0,
-        25
-      ],
-      [
-        0,
-        226
-      ],
-      [
-        -159,
-        159
-      ],
-      [
-        -226,
-        0
-      ],
-      [
-        -159,
-        -159
-      ],
-      [
-        0,
-        -226
-      ],
-      [
-        159,
-        -159
-      ],
-      [
-        226,
-        0
-      ],
       [
         159,
         159
