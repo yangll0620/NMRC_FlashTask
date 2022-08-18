@@ -44,7 +44,7 @@
                                     Margin="20,0,0,0"  FontWeight="Normal" FontSize="11"
                                     TextAlignment="Center" Padding="5,1,0,0">
                             No. of Targets</TextBlock>
-            <TextBox x:Name="textBox_targetNoOfPositions" Grid.Row="1" 
+            <TextBox x:Name="textBox_targetNoOfPositions" Grid.Row="1" IsEnabled="False"
                      HorizontalAlignment="Left" VerticalAlignment="Center" 
                      HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
                      Height="25" Width ="60" Margin="150,0,0,0" TextWrapping="Wrap"   FontWeight="Normal" />
