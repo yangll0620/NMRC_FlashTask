@@ -63,6 +63,11 @@ namespace COTTask_wpf
         static Key key_Pause = Key.P;
         static Key key_Resume = Key.R;
 
+        public bool IO8Used = false;
+        bool PauseBtnUsed = false;
+        bool ShowHotkeys = true;
+
+
         public MainWindow()
         {
             InitializeComponent(); 
@@ -80,8 +85,10 @@ namespace COTTask_wpf
             this.Left = Rect_showMainScreen.Left;
 
 
-            // Check serial Port IO8 connection
-            CheckIO8Connection();
+            if(IO8Used)// Check serial Port IO8 connection
+                CheckIO8Connection();
+            else
+                btn_start.IsEnabled = true;
 
 
             // Load Default Config File
@@ -91,6 +98,11 @@ namespace COTTask_wpf
 
             // Get the touch Screen Rectangle
             Rect_touchScreen = Utility.Detect_PrimaryScreen_Rect();
+
+            if(ShowHotkeys)
+            {
+                textBox_tmp.Text = "Hot Keys: start - S, Stop - Space";
+            }
         }
 
 
@@ -100,7 +112,8 @@ namespace COTTask_wpf
             serialPortIO8_name = SerialPortIO8.Locate_serialPortIO8();
             if (String.Equals(serialPortIO8_name, ""))
             {
-                btn_start.IsEnabled = false;
+                if(IO8Used)
+                    btn_start.IsEnabled = false;
 
                 btn_comReconnect.Visibility = Visibility.Visible;
                 btn_comReconnect.IsEnabled = true;
@@ -165,7 +178,7 @@ namespace COTTask_wpf
             Win_TestStartpadJuicer.Show();
         }
 
-        private void saveInputParameters()
+        private void saveInputParameters2Txt()
         {
             DateTime time_now = DateTime.Now;
 
@@ -499,7 +512,7 @@ namespace COTTask_wpf
             File.WriteAllText(configFile, json);
         }
 
-        private void DisabledSetParameters()
+        private void DisabledSetMenu()
         {
             textBox_NHPName.IsEnabled = false;
             btn_SelectSavefolder.IsEnabled = false;
@@ -511,7 +524,7 @@ namespace COTTask_wpf
             menu_Tools.IsEnabled = false;
         }
 
-        private void EnabledSetParameters()
+        private void EnabledSetMenu()
         {
             textBox_NHPName.IsEnabled = true;
             btn_SelectSavefolder.IsEnabled = true;
@@ -526,23 +539,26 @@ namespace COTTask_wpf
         public void presentation_Start()
         {// Start presentation
 
-            // save all the Input parameters
-            saveInputParameters();
+            // save all the Input parameters to txt file
+            saveInputParameters2Txt();
 
             // Disable Set Paremeter Functions
-            DisabledSetParameters();
+            DisabledSetMenu();
 
             // Set btn_Start,  btn_stop and btn_pause
             btn_start.IsEnabled = false;
             btn_stop.IsEnabled = true;
             btn_pause.IsEnabled = true; 
+            
+            
             UninitializeHotKey(HotKeyId_Start);
             InitializeHotKey(key_Stop, HotKeyId_Stop);
-            InitializeHotKey(key_Pause, HotKeyId_Pause);
+            if(PauseBtnUsed)
+                InitializeHotKey(key_Pause, HotKeyId_Pause);
 
-            // Create Presentation Instance only at the First Start Click
+            
             if (hasStartedPresention == false)
-            {
+            {// Create Presentation Instance only at the First Start Click
                 taskPresentWin = new presentation(this)
                 {
                     Top = Rect_touchScreen.Top,
@@ -558,7 +574,7 @@ namespace COTTask_wpf
             // Start the Task
             taskPresentWin.Show();
             taskPresentWin.Prepare_bef_Present();
-            taskPresentWin.Present_Start();
+            //taskPresentWin.Present_Start();
         }
 
         public void presentation_Stop()
@@ -569,7 +585,7 @@ namespace COTTask_wpf
                 taskPresentWin.Hide();
             }
 
-            EnabledSetParameters();
+            EnabledSetMenu();
 
             // btn_Start and btn_stop
             btn_start.IsEnabled = true;
@@ -578,7 +594,8 @@ namespace COTTask_wpf
 
             InitializeHotKey(key_Start, HotKeyId_Start);
             UninitializeHotKey(HotKeyId_Stop);
-            UninitializeHotKey(HotKeyId_Pause);
+            if(PauseBtnUsed)
+                UninitializeHotKey(HotKeyId_Pause);
         }
 
         public void presentation_Pause()

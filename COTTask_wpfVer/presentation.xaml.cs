@@ -227,6 +227,11 @@ namespace COTTask_wpf
         // variables for counting total trials and blockN
         int totalTriali;
         int blockN;
+        
+        
+        
+        readonly bool AudioFeedbackNeeded = false;
+        readonly bool SaveSummaryofExpNeeded = false;
 
 
         /*****Methods*******/
@@ -244,11 +249,11 @@ namespace COTTask_wpf
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {//  Called by Window.show() at the first time
-            WindowState = WindowState.Maximized;
+            //WindowState = WindowState.Maximized;
 
 
-            // Create Serial port 
-            Create_SerialPort();
+            if(parent.IO8Used) // Create Serial port 
+                Create_SerialPort();
 
             // Create stopwatches
             Create_StopWatches();
@@ -260,11 +265,11 @@ namespace COTTask_wpf
             Create_GoCircle();
             Create_OneCrossing();
 
-            // Set audio Feedback related members 
-            SetAudioFeedback();
+            if(AudioFeedbackNeeded) // Set audio Feedback related members 
+                SetAudioFeedback();
 
-            // IO8EventTDT Cmd
-            Generate_IO8EventTDTCmd();
+            if (parent.IO8Used)// IO8EventTDT Cmd
+                Generate_IO8EventTDTCmd();
         }
 
 
@@ -341,18 +346,21 @@ namespace COTTask_wpf
 
         public void Prepare_bef_Present()
         {
-            // create a serial Port IO8 instance, and open it
-            serialPort_IO8 = new SerialPort();
-            try
-            {
-                serialPort_SetOpen(parent.serialPortIO8_name, baudRate);
+            if(parent.IO8Used)
+            {// create a serial Port IO8 instance, and open it
+                serialPort_IO8 = new SerialPort();
+                try
+                {
+                    serialPort_SetOpen(parent.serialPortIO8_name, baudRate);
+                }
+                catch (Exception ex)
+                {
+                    System.Windows.MessageBox.Show(ex.Message, "Error Message", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                // Thread for Read and Write IO8
+                thread_ReadWrite_IO8 = new Thread(new ThreadStart(Thread_ReadWrite_IO8));
             }
-            catch (Exception ex)
-            {
-                System.Windows.MessageBox.Show(ex.Message, "Error Message", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-            // Thread for Read and Write IO8
-            thread_ReadWrite_IO8 = new Thread(new ThreadStart(Thread_ReadWrite_IO8));
+            
 
 
             // init a global stopwatch
@@ -685,17 +693,18 @@ namespace COTTask_wpf
             PresentTrial = false;
 
             // After Trials Presentation
-            if (serialPort_IO8.IsOpen)
+            if (serialPort_IO8 != null && serialPort_IO8.IsOpen)
                 serialPort_IO8.Close();
 
-            thread_ReadWrite_IO8.Abort();
+            if (thread_ReadWrite_IO8 != null)
+                thread_ReadWrite_IO8.Abort();
 
             globalWatch.Stop();
             
             tpoints1TouchWatch.Stop();
 
-            // save the summary of exp
-            SaveSummaryofExp();
+            if(SaveSummaryofExpNeeded)// save the summary of exp
+                SaveSummaryofExp();
         }
 
         public void Present_Pause()

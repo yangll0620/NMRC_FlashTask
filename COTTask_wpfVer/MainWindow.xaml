@@ -154,6 +154,21 @@
                             <RowDefinition Height="3.5*"/>
                         </Grid.RowDefinitions>
 
+                        <Grid Grid.Row="3">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+
+                            <TextBox x:Name="textBox_tmp" IsEnabled="False" Grid.Row="1"
+                                     Width="400" Height="40" Margin="30,0,0,0"
+                                     HorizontalAlignment="Left" VerticalAlignment="Top"
+                                     HorizontalContentAlignment="Left" VerticalContentAlignment="Center"
+                                     TextWrapping="Wrap"  FontWeight="Normal" Grid.ColumnSpan="2" />
+
+                        </Grid>
+
                         <Grid Grid.Row="0">
                             <Label Content="Saved Folder" 
                                    HorizontalAlignment="Left"  VerticalAlignment="Center" HorizontalContentAlignment="Right"
@@ -229,14 +244,14 @@
                         Margin="0,0,20,15"  Width="100" Height="35" 
                         FontWeight="Bold" FontFamily="Microsoft Sans Serif" FontSize="14"
                         Click="Btn_stop_Click"/>
-                <Button x:Name="btn_pause" 
-                    Content="Pause" HorizontalAlignment="Left" VerticalAlignment="Bottom"
-                    Margin="200,0,0,15"  Width="100" Height="35" IsEnabled="False"
+                <Button x:Name="btn_pause" Content="Pause" IsEnabled="False" Visibility="Hidden"
+                    HorizontalAlignment="Left" VerticalAlignment="Bottom"
+                    Margin="200,0,0,15"  Width="100" Height="35" 
                     FontWeight="Bold" FontFamily="Microsoft Sans Serif" FontSize="14" 
                     Click="btnPause_Click" />
-                <Button x:Name="btn_resume" 
-                    Content="Resume" HorizontalAlignment="Left" VerticalAlignment="Bottom"
-                    Margin="20,0,0,15"  Width="100" Height="35" IsEnabled="False"
+                <Button x:Name="btn_resume" Content="Resume" IsEnabled="False" Visibility="Hidden"
+                    HorizontalAlignment="Left" VerticalAlignment="Bottom"
+                    Margin="20,0,0,15"  Width="100" Height="35" 
                     FontWeight="Bold" FontFamily="Microsoft Sans Serif" FontSize="14" 
                     Click="btnResume_Click" />
 
