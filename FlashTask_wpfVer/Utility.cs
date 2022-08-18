@@ -6,7 +6,7 @@ using sd = System.Drawing;
 using System.Windows.Shapes;
 using System.Windows.Media;
 
-namespace COTTask_wpf
+namespace FlashTask_wpf
 {
     class Utility
     {

@@ -2,7 +2,7 @@
 using System.Windows;
 using System.Windows.Media;
 
-namespace COTTask_wpf
+namespace FlashTask_wpf
 {
     /// <summary>
     /// Interaction logic for SetupColorsWin.xaml

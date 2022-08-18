@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace COTTask_wpf
+namespace FlashTask_wpf
 {
     /// <summary>
     /// Interaction logic for Window1.xaml

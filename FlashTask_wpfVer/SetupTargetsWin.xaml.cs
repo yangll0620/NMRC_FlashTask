@@ -13,7 +13,7 @@ using System.Windows.Shapes;
 using System.Windows.Input;
 
 
-namespace COTTask_wpf
+namespace FlashTask_wpf
 {
     /// <summary>
     /// Interaction logic for SetupTargetsWin.xaml

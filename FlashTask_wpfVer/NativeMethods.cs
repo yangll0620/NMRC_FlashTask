@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 
-namespace COTTask_wpf
+namespace FlashTask_wpf
 {
     internal static class NativeMethods
     {

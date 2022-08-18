@@ -13,7 +13,7 @@ using System.Reflection;
 using sd = System.Drawing;
 using System.Windows.Interop;
 
-namespace COTTask_wpf
+namespace FlashTask_wpf
 {
     /// <summary>
     /// Interaction logic for presentation.xaml

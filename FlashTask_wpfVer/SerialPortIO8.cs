@@ -3,7 +3,7 @@ using System.Windows;
 using System.IO.Ports;
 using System.Threading;
 
-namespace COTTask_wpf
+namespace FlashTask_wpf
 {
     class SerialPortIO8
     {

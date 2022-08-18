@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace COTTask_wpf
+namespace FlashTask_wpf
 {
     /// <summary>
     /// Interaction logic for SetupTimeWin.xaml

@@ -1,4 +1,4 @@
-﻿<Application x:Class="COTTask_wpf.App"
+﻿<Application x:Class="FlashTask_wpf.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:COTTask_wpf"
