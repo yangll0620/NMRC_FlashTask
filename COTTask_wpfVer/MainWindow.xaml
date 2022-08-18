@@ -41,14 +41,14 @@
             <!--Grid RowDefinitions: 0, 1, 2-->
             <Grid.RowDefinitions>
                 <RowDefinition Height="2*"/>
-                <RowDefinition Height="6*"/>
+                <RowDefinition Height="7*"/>
                 <RowDefinition Height="1*"/>
             </Grid.RowDefinitions>
 
 
             <!--Row0: Required Inputs-->
             <GroupBox Header="Required Inputs" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="0"
-                  Margin="5,15,0,0"  
+                  Margin="10,15,0,0"  
                   FontFamily="Microsoft Sans Serif" FontWeight="Bold" Grid.ColumnSpan="2">
                 <Grid HorizontalAlignment="Left" VerticalAlignment="Top" Height="50"  Width="780" Margin="0,10,0,0">
                     <Grid.ColumnDefinitions>
@@ -84,7 +84,59 @@
                 </Grid>
             </GroupBox>
 
-            <Grid Grid.Row="1">
+
+            <GroupBox Header="Setup" Grid.Row="1" Margin="10,15,0,0"
+                      HorizontalAlignment="Left" VerticalAlignment="Top" 
+                      FontFamily="Microsoft Sans Serif" FontWeight="Bold">
+                <Grid Margin="0, 20, 0, 0" Height="300"  Width="800">
+
+                    <!--Grid RowDefinitions: 0, 1, 2-->
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="3*"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Row="0">
+                        <GroupBox Header="Time Setup (s)">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Grid Grid.Column="0">
+                                    <TextBlock Text ="t_TargetOn" Height="25" Width ="75" Margin="0,0,0,0"  
+                                               FontWeight="Normal" 
+                                               HorizontalAlignment="Left" VerticalAlignment="Center"  TextAlignment="Right" Padding="3"/>
+
+                                    <TextBox x:Name="textBox_tTargetOn"  Height="25" Width="50" Margin="80,0,0,0" 
+                                                 HorizontalAlignment="Left" VerticalAlignment="Center" 
+                                                 HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                                                 TextWrapping="Wrap"   FontWeight="Normal" />
+                                </Grid>
+                                <Grid Grid.Column="1">
+                                    <TextBlock Text ="t_TargetOff" Height="25" Margin="0,0,0,0"  FontWeight="Normal" 
+                                                   HorizontalAlignment="Left" VerticalAlignment="Center"  TextAlignment="Right" Padding="3"/>
+
+                                    <TextBox x:Name="textBox_tTargetOff"  Height="25" Width="50" Margin="80,0,0,0" 
+                                                 HorizontalAlignment="Left" VerticalAlignment="Center" 
+                                                 HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                                                 TextWrapping="Wrap"   FontWeight="Normal" />
+                                </Grid>
+                            </Grid>
+                        </GroupBox>
+
+                    </Grid>
+
+                </Grid>
+            </GroupBox>
+
+
+
+
+            <Grid Grid.Row="1" Visibility="Hidden">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="2*" />
                     <ColumnDefinition Width="3*"/>
@@ -92,46 +144,55 @@
 
 
                 <!--Row1: Realtime Feedback-->
-                <GroupBox Header="Realtime Feedback" Grid.Column="0" 
+                <GroupBox Header="Setup" Grid.Column="0" 
                       HorizontalAlignment="Left" VerticalAlignment="Top"
                       Margin="5,15,0,0" FontFamily="Microsoft Sans Serif" FontWeight="Bold">
                     <Grid HorizontalAlignment="Left" VerticalAlignment="Top" Height="300"  Width="300" Margin="0,10,0,0">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*"/>
+                            <RowDefinition Height="2*"/>
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
 
-                        <Grid Grid.Row="0">
-                            <GroupBox Header="Time Setup (s)">
+
+                        <Grid Grid.Row="1">
+                            <GroupBox Header="Color Setup">
                                 <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="*"/>
                                         <ColumnDefinition Width="*"/>
                                     </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
 
-                                    <Grid Grid.Column="0">
-                                        <TextBlock Text ="t_TargetOn" Height="23" Margin="0,12,65,0"  FontWeight="Normal" 
-                                                   HorizontalAlignment="Right" VerticalAlignment="Center"  TextAlignment="Right" Padding="3"/>
+                                    <Label Content="Target Fill" Grid.Row="0" Grid.Column="0" 
+                                           HorizontalAlignment="Right" VerticalAlignment="top" 
+                                           HorizontalContentAlignment="Right" VerticalContentAlignment="Center"
+                                           Height="25" Margin="0,5,135,0"  FontWeight="Normal"/>
+                                    
+                                    <ComboBox x:Name="cbo_goFillColor" Grid.Row="0" Grid.Column="0" 
+                                              HorizontalAlignment="Right" VerticalAlignment="Top" 
+                                              Width="120" Height="25" Margin="0,5,10,0" 
+                                              VerticalContentAlignment="Center" FontWeight="Normal" >
+                                        <ComboBox.ItemTemplate>
+                                            <DataTemplate>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <Rectangle Fill="{Binding Name}" Width="16" Height="16" Margin="0,2,5,2" />
+                                                    <TextBlock Text="{Binding Name}" />
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </ComboBox.ItemTemplate>
+                                    </ComboBox>
 
-                                        <TextBox x:Name="textBox_tTargetOn"  Height="23" Width="50" Margin="0,10,10,0" 
-                                                 HorizontalAlignment="Right" VerticalAlignment="Center" 
-                                                 HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
-                                                 TextWrapping="Wrap"   FontWeight="Normal" />
-                                    </Grid>
-                                    <Grid Grid.Column="2">
-                                        <TextBlock Text ="t_TargetOff" Height="23" Margin="0,12,65,0"  FontWeight="Normal" 
-                                                   HorizontalAlignment="Right" VerticalAlignment="Center"  TextAlignment="Right" Padding="3"/>
-
-                                        <TextBox x:Name="textBox_tTargetOff"  Height="23" Width="50" Margin="0,10,10,0" 
-                                                 HorizontalAlignment="Right" VerticalAlignment="Center" 
-                                                 HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
-                                                 TextWrapping="Wrap"   FontWeight="Normal" />
-                                    </Grid>
                                 </Grid>
+                                
+
                             </GroupBox>
 
                         </Grid>
-                        
+
                         <Grid Grid.Row="2">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="*"/>

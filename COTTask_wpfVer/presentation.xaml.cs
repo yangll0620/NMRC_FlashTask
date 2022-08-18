@@ -233,7 +233,6 @@ namespace COTTask_wpf
         readonly bool AudioFeedbackNeeded = false;
         readonly bool SaveSummaryofExpNeeded = false;
 
-        int t_flashMS = 200;
 
         /*****Methods*******/
         public presentation(MainWindow mainWindow)
