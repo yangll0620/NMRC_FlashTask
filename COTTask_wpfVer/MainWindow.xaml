@@ -95,51 +95,89 @@
                 <GroupBox Header="Realtime Feedback" Grid.Column="0" 
                       HorizontalAlignment="Left" VerticalAlignment="Top"
                       Margin="5,15,0,0" FontFamily="Microsoft Sans Serif" FontWeight="Bold">
-                    <Grid HorizontalAlignment="Left" VerticalAlignment="Top" Height="250"  Width="300" Margin="0,10,0,0">
+                    <Grid HorizontalAlignment="Left" VerticalAlignment="Top" Height="300"  Width="300" Margin="0,10,0,0">
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="*"/>
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
 
-                        <Label Content="Total Trials" Grid.Row="0"
+                        <Grid Grid.Row="0">
+                            <GroupBox Header="Time Setup (s)">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Grid Grid.Column="0">
+                                        <TextBlock Text ="t_TargetOn" Height="23" Margin="0,12,65,0"  FontWeight="Normal" 
+                                                   HorizontalAlignment="Right" VerticalAlignment="Center"  TextAlignment="Right" Padding="3"/>
+
+                                        <TextBox x:Name="textBox_tTargetOn"  Height="23" Width="50" Margin="0,10,10,0" 
+                                                 HorizontalAlignment="Right" VerticalAlignment="Center" 
+                                                 HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                                                 TextWrapping="Wrap"   FontWeight="Normal" />
+                                    </Grid>
+                                    <Grid Grid.Column="2">
+                                        <TextBlock Text ="t_TargetOff" Height="23" Margin="0,12,65,0"  FontWeight="Normal" 
+                                                   HorizontalAlignment="Right" VerticalAlignment="Center"  TextAlignment="Right" Padding="3"/>
+
+                                        <TextBox x:Name="textBox_tTargetOff"  Height="23" Width="50" Margin="0,10,10,0" 
+                                                 HorizontalAlignment="Right" VerticalAlignment="Center" 
+                                                 HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                                                 TextWrapping="Wrap"   FontWeight="Normal" />
+                                    </Grid>
+                                </Grid>
+                            </GroupBox>
+
+                        </Grid>
+                        
+                        <Grid Grid.Row="2">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+
+                            <Label Content="Total Trials" Grid.Row="0"
                                        HorizontalAlignment="Left" VerticalAlignment="top" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"                             
                                        Height="25" Margin="5,10,0,0"  FontWeight="Normal" FontSize="11"/>
-                        <TextBox x:Name="textBox_totalGoTrialNum"  Grid.Row="0" Text="0"
+                            <TextBox x:Name="textBox_totalGoTrialNum"  Grid.Row="0" Text="0"
                                          IsEnabled="False" HorizontalAlignment="Left" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
                                          Height="25" Width ="75" Margin="110,10,5,0" TextWrapping="Wrap"   FontSize="11" FontWeight="Normal" />
 
-                        <Label Content="Success Go Trials" Grid.Row="1"
+                            <Label Content="Success Go Trials" Grid.Row="1"
                                        HorizontalAlignment="Left" VerticalAlignment="top" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"                             
                                        Height="25" Margin="5,10,0,0"  FontWeight="Normal" FontSize="11"/>
-                        <TextBox x:Name="textBox_successGoTrialNum"  Grid.Row="1" Text="0"
+                            <TextBox x:Name="textBox_successGoTrialNum"  Grid.Row="1" Text="0"
                                          IsEnabled="False" HorizontalAlignment="Left" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
                                          Height="25" Width ="75" Margin="110,10,5,0" TextWrapping="Wrap"   FontSize="11" FontWeight="Normal" />
 
-                        <Label Content="Miss Trials" Grid.Row="2" 
+                            <Label Content="Miss Trials" Grid.Row="2" 
                                        HorizontalAlignment="Left" VerticalAlignment="top" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"                             
                                        Height="25" Margin="5,10,0,0"  FontWeight="Normal" FontSize="11"/>
-                        <TextBox x:Name="textBox_missGoTrialNum"  Grid.Row="2" Text="0"
+                            <TextBox x:Name="textBox_missGoTrialNum"  Grid.Row="2" Text="0"
                                          IsEnabled="False" HorizontalAlignment="Left" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
                                          Height="25" Width ="75" Margin="110,10,5,0" TextWrapping="Wrap"   FontSize="11" FontWeight="Normal" />
 
 
-                        <Label Content="No Reaction Trials" Grid.Row="3"
+                            <Label Content="No Reaction Trials" Grid.Row="3"
                                        HorizontalAlignment="Left" VerticalAlignment="top" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"                             
                                        Height="25" Margin="5,10,0,0"  FontWeight="Normal" FontSize="11"/>
-                        <TextBox x:Name="textBox_noreactionGoTrialNum"  Grid.Row="3" Text="0"
+                            <TextBox x:Name="textBox_noreactionGoTrialNum"  Grid.Row="3" Text="0"
                                          IsEnabled="False" HorizontalAlignment="Left" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
                                          Height="25" Width ="75" Margin="110,10,5,0" TextWrapping="Wrap"   FontSize="11" FontWeight="Normal" />
 
-                        <Label Content="No Reach Trials" Grid.Row="4"
+                            <Label Content="No Reach Trials" Grid.Row="4"
                                        HorizontalAlignment="Left" VerticalAlignment="top" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"                             
                                        Height="25" Margin="5,10,0,0"  FontWeight="Normal" FontSize="11"/>
-                        <TextBox x:Name="textBox_noreachGoTrialNum"  Grid.Row="4" Text="0"
+                            <TextBox x:Name="textBox_noreachGoTrialNum"  Grid.Row="4" Text="0"
                                          IsEnabled="False" HorizontalAlignment="Left" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
                                          Height="25" Width ="75" Margin="110,10,5,0" TextWrapping="Wrap"   FontSize="11" FontWeight="Normal"/>
-                    </Grid>
+                        </Grid>
+                        </Grid>
                 </GroupBox>
 
 

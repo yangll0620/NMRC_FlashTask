@@ -131,6 +131,7 @@ namespace COTTask_wpf
         // Wait Time Range for Each Event, and Max Reaction and Reach Time (ms)
         float tMax_ReactionTimeMS, tMax_ReachTimeMS; 
         Int32 t_VisfeedbackShowMS, t_InterTrialMS; // Visual Feedback Show Time (ms)
+        Int32 t_FlashTargetOnMS, t_FlashTargetOffMS;
 
         bool PresentTrial;
 
@@ -450,17 +451,21 @@ namespace COTTask_wpf
 
         public async void Present_Start2()
         {
-            myGrid.Background = brush_BKReady;
-
             Modify_GoCircle(parent.optPostions_OCenter_List[0]);
 
+            // Flash Time
+            t_FlashTargetOnMS = (Int32)(float.Parse(parent.textBox_tTargetOn.Text) * 1000);
+            t_FlashTargetOffMS = (Int32)(float.Parse(parent.textBox_tTargetOff.Text) * 1000);
+
+
             PresentTrial = true;
-            while(PresentTrial)
+            myGrid.Background = brush_BKReady;
+            while (PresentTrial)
             {
                 circleGo.Visibility = Visibility.Visible;
-                await Task.Delay(t_flashMS);
+                await Task.Delay(t_FlashTargetOnMS);
                 circleGo.Visibility = Visibility.Hidden;
-                await Task.Delay(t_flashMS);
+                await Task.Delay(t_FlashTargetOffMS);
             }
             
         }
@@ -841,7 +846,6 @@ namespace COTTask_wpf
 
             // Juicer Time
             t_JuicerCorrectGiven = (Int32)(parent.t_JuicerCorrectGivenS * 1000);
-
 
 
             /* ---- Get all the Set Colors ----- */

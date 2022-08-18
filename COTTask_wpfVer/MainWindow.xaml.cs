@@ -36,9 +36,10 @@ namespace COTTask_wpf
         // Time Related Variables
         public float[] tRange_ReadyTimeS;
         public float tMax_ReactionTimeS, tMax_ReachTimeS, t_VisfeedbackShowS, t_InterTrialS, t_JuicerCorrectGivenS;
+        public float t_FlashTargetOnS, t_FlashTargetOffS;
 
 
-        
+
         // Target Related Variables
         public int targetNoOfPositions;
         public float targetDiaCM;
@@ -223,6 +224,8 @@ namespace COTTask_wpf
                 file.WriteLine(String.Format("{0, -40}:  {1}", "Inter-Trial Time (s)", t_InterTrialS.ToString()));
                 file.WriteLine(String.Format("{0, -40}:  {1}", "Visual Feedback Time (s)", t_VisfeedbackShowS.ToString()));
                 file.WriteLine(String.Format("{0, -40}:  {1}", "Juicer Given Time for Correct (s)", t_JuicerCorrectGivenS.ToString()));
+                file.WriteLine(String.Format("{0, -40}:  {1}", "Flash Target On Time (s)", t_FlashTargetOnS.ToString()));
+                file.WriteLine(String.Format("{0, -40}:  {1}", "Flash Target Off Time (s)", t_FlashTargetOffS.ToString()));
 
                 // Save Color Settings
                 file.WriteLine("\nColor Settings:");
@@ -433,6 +436,12 @@ namespace COTTask_wpf
             t_InterTrialS = float.Parse((string)configTime["Inter Trials Time"]);
             t_JuicerCorrectGivenS = float.Parse((string)configTime["Juice Correct Given Time"]);
 
+            t_FlashTargetOnS = float.Parse((string)configTime["Flash Target On Time"]);
+            t_FlashTargetOffS = float.Parse((string)configTime["Flash Target Off Time"]);
+            textBox_tTargetOn.Text = t_FlashTargetOnS.ToString();
+            textBox_tTargetOff.Text = t_FlashTargetOffS.ToString();
+
+
             // Color Sections
             var configColors = config["Colors"];
             targetFillColorStr = configColors["Target Fill Color"];
@@ -474,6 +483,8 @@ namespace COTTask_wpf
             configTimes.t_InterTrial = t_InterTrialS;
             configTimes.t_VisfeedbackShow = t_VisfeedbackShowS;
             configTimes.t_JuicerCorrectGiven = t_JuicerCorrectGivenS;
+            configTimes.t_FlashTargetOn = t_FlashTargetOnS;
+            configTimes.t_FlashTargetOff = t_FlashTargetOffS;
 
 
             // config Target
@@ -549,8 +560,13 @@ namespace COTTask_wpf
             btn_start.IsEnabled = false;
             btn_stop.IsEnabled = true;
             btn_pause.IsEnabled = true; 
-            
-            
+
+
+            textBox_NHPName.IsEnabled=false;
+            textBox_tTargetOn.IsEnabled = false;
+            textBox_tTargetOff.IsEnabled = false;
+
+
             UninitializeHotKey(HotKeyId_Start);
             InitializeHotKey(key_Stop, HotKeyId_Stop);
             if(PauseBtnUsed)
@@ -591,6 +607,11 @@ namespace COTTask_wpf
             btn_start.IsEnabled = true;
             btn_stop.IsEnabled = false;
             btn_pause.IsEnabled = false;
+
+
+            textBox_NHPName.IsEnabled = true;
+            textBox_tTargetOn.IsEnabled = true;
+            textBox_tTargetOff.IsEnabled = true;
 
             InitializeHotKey(key_Start, HotKeyId_Start);
             UninitializeHotKey(HotKeyId_Stop);

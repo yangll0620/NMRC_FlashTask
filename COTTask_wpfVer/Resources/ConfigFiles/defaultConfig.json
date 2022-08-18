@@ -10,15 +10,17 @@
     "Max Reach Time": 0.8,
     "Visual Feedback Show Time": 1.0,
     "Inter Trials Time": 0.5,
-    "Juice Correct Given Time": 0.8
+    "Juice Correct Given Time": 0.8,
+    "Flash Target On Time": 0.5,
+    "Flash Target Off Time": 0.5
   },
   "Target": {
     "Target Diameter (cm)": 8.0,
     "Target No of Positions": 1,
     "optPostions_OCenter_List": [
       [
-        159,
-        159
+        0,
+        0
       ]
     ]
   },

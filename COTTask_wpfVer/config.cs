@@ -48,6 +48,12 @@ namespace COTTask_wpf
 
         [JsonProperty(PropertyName = "Juice Correct Given Time")]
         public float t_JuicerCorrectGiven;
+
+        [JsonProperty(PropertyName = "Flash Target On Time")]
+        public float t_FlashTargetOn;
+
+        [JsonProperty(PropertyName = "Flash Target Off Time")]
+        public float t_FlashTargetOff;
     }
 
 
