@@ -450,6 +450,17 @@ namespace COTTask_wpf
 
         public async void Present_Start2()
         {
+            Color selectedColor;
+            
+            selectedColor = (Color)(typeof(Colors).GetProperty(parent.targetFillColorStr) as PropertyInfo).GetValue(null, null);
+            brush_goCircleFill = new SolidColorBrush(selectedColor);
+            
+            selectedColor = (Color)(typeof(Colors).GetProperty(parent.targetOutlineColorStr) as PropertyInfo).GetValue(null, null);
+            brush_goCircleOutline = new SolidColorBrush(selectedColor);
+            
+            selectedColor = (Color)(typeof(Colors).GetProperty(parent.BKColorStr) as PropertyInfo).GetValue(null, null);
+            brush_BK = new SolidColorBrush(selectedColor);
+
             Modify_GoCircle(parent.optPostions_OCenter_List[0]);
 
             // Flash Time

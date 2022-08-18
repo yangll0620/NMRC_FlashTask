@@ -22,9 +22,9 @@
                 </MenuItem>
 
                 <MenuItem x:Name="menu_Settings" Header="_Settings">
-                    <MenuItem Header="_Color Settings" Click="MenuItem_SetupColors"/>
-                    <MenuItem Header="_Time Setting" Click="MenuItem_SetupTime"/>
                     <MenuItem Header="_Target Setting" Click="MenuItem_SetupTarget"/>
+                    <MenuItem Header="_Color Settings" Click="MenuItem_SetupColors" IsEnabled="False" Visibility="Hidden"/>
+                    <MenuItem Header="_Time Setting" Click="MenuItem_SetupTime" IsEnabled="False" Visibility="Hidden"/>
                 </MenuItem>
 
                 <MenuItem x:Name="menu_Tools" Header="Tools">
@@ -85,6 +85,7 @@
             </GroupBox>
 
 
+            <!--Row1: Setup-->
             <GroupBox Header="Setup" Grid.Row="1" Margin="10,15,0,0"
                       HorizontalAlignment="Left" VerticalAlignment="Top" 
                       FontFamily="Microsoft Sans Serif" FontWeight="Bold">
@@ -201,11 +202,26 @@
 
                     </Grid>
 
+
+
+                    <!--Will be used for Target Setup-->
+                    <Grid Grid.Row="2">
+                        <GroupBox Header="Hot Keys">
+                            <ListBox Width="100" Height="100" VerticalAlignment="Top" HorizontalAlignment="Left" >
+                                <TextBlock Text="Start:  S" FontWeight="Normal"/>
+                                <TextBlock Text="Stop:  Space" FontWeight="Normal"/>
+                            </ListBox>
+                        </GroupBox>
+
+                    </Grid>
+
                 </Grid>
             </GroupBox>
 
 
-            <Grid Grid.Row="1" Visibility="Hidden">
+
+            <!--Row2: previous setup, will be deleted-->
+            <Grid Grid.Row="1" Visibility="Hidden" IsEnabled="False">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="2*" />
                     <ColumnDefinition Width="3*"/>
