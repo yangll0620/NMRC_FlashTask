@@ -574,7 +574,7 @@ namespace COTTask_wpf
             // Start the Task
             taskPresentWin.Show();
             taskPresentWin.Prepare_bef_Present();
-            //taskPresentWin.Present_Start();
+            taskPresentWin.Present_Start2();
         }
 
         public void presentation_Stop()

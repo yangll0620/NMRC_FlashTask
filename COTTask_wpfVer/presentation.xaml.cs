@@ -227,12 +227,10 @@ namespace COTTask_wpf
         // variables for counting total trials and blockN
         int totalTriali;
         int blockN;
-        
-        
-        
+
+
         readonly bool AudioFeedbackNeeded = false;
         readonly bool SaveSummaryofExpNeeded = false;
-
 
         /*****Methods*******/
         public presentation(MainWindow mainWindow)
@@ -362,7 +360,6 @@ namespace COTTask_wpf
             }
             
 
-
             // init a global stopwatch
             globalWatch = new Stopwatch();
             tpoints1TouchWatch = new Stopwatch();
@@ -442,20 +439,56 @@ namespace COTTask_wpf
             }
         }
 
+
+
+        private void Show_Flash()
+        {
+            int i = 1;
+            PresentTrial = true;
+            while (PresentTrial && i < 10000000)
+            {
+                myGrid.Background = brush_BKTargetShown;
+                i++;
+            }
+            myGrid.Background = brush_BDWaitTrialStart;
+        }
+
+
+        public async void Present_Start2()
+        {
+            myGrid.Background = brush_BKReady;
+            PresentTrial = true;
+            int i = 1;
+            while(PresentTrial && i < 10)
+            {
+                myGrid.Background = brush_BKTargetShown;
+                await Task.Delay(200);
+                myGrid.Background = brush_BKReady;
+                await Task.Delay(200);
+                
+
+                i++;
+            }
+            
+        }
+
         public async void Present_Start()
-        {                 
+        {   
+            
+
+
             int[] pos_OCenter_Taget;
             int t_ReadyMS;
             Random rnd = new Random();
 
             // restart globalWatch and thread for IO8
             globalWatch.Restart();
-            thread_ReadWrite_IO8.Start();
+            if (thread_ReadWrite_IO8 != null)
+                thread_ReadWrite_IO8.Start();
 
-            
 
             // Present Each Trial
-            PresentTrial = true;
+            PresentTrial = false;
             timestamp_0 = DateTime.Now.Ticks;
             while (PresentTrial)
             {
@@ -667,24 +700,6 @@ namespace COTTask_wpf
                             
                 }
             }
-
-            if(PresentTrial)
-            {
-                // Detect the return to startpad timepoint for the last trial
-                pressedStartpad = PressedStartpad.No;
-                try
-                {
-                    await Wait_Return2StartPad(1);
-                }
-                catch (TaskCanceledException)
-                {
-                    using (StreamWriter file = File.AppendText(file_saved))
-                    {
-                        file.WriteLine(String.Format("{0, -40}: {1}", "Returned to Startpad TimePoint", timePoint_StartpadTouched.ToString()));
-                    }
-                }
-            }
-            
 
         }
 
@@ -1036,7 +1051,6 @@ namespace COTTask_wpf
             Remove_OneCrossing();
         }
 
-
         private void Thread_ReadWrite_IO8()
         {/* Thread for reading/writing serial port IO8*/
 
@@ -1142,42 +1156,6 @@ namespace COTTask_wpf
 
             return task_WaitStart;
         }
-
-
-        private Task Wait_Return2StartPad(float t_maxWait)
-        {
-            /* 
-             * Wait for Returning Back to Startpad 
-             * 
-             * Input: 
-             *    t_maxWait: the maximum wait time for returning back (s)  
-             */
-
-
-            return Task.Run(() =>
-            {
-                Stopwatch waitWatch = new Stopwatch();
-                waitWatch.Restart();
-                bool waitEnoughTag = false;
-                while (PresentTrial && pressedStartpad == PressedStartpad.No && !waitEnoughTag)
-                {
-                    if (waitWatch.ElapsedMilliseconds >= t_maxWait * 1000)
-                    {// Wait for t_maxWait
-                        waitEnoughTag  = true;
-                    }
-                }
-
-                waitWatch.Stop();
-
-
-                if (PresentTrial && pressedStartpad == PressedStartpad.Yes)
-                {
-                    throw new TaskCanceledException("A return touched occurred");
-                }
-
-            });
-        }
-
 
         private Task Wait_Reaction()
         {/* Wait for Reaction within tMax_ReactionTime */
