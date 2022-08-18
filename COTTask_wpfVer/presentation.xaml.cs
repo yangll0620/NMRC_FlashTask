@@ -102,7 +102,7 @@ namespace COTTask_wpf
         Line crossing_vertLine, crossing_horiLine;
 
         // ColorBrushes 
-        private SolidColorBrush brush_goCircleFill;
+        private SolidColorBrush brush_goCircleFill, brush_goCircleOutline, brush_BK;
         private SolidColorBrush brush_BKWaitTrialStart, brush_BDWaitTrialStart, brush_BKReady, brush_BKTargetShown;
         private SolidColorBrush brush_CorrectFill, brush_CorrOutline;
         private SolidColorBrush brush_ErrorCrossing, brush_ErrorFill, brush_ErrorOutline;
@@ -458,7 +458,7 @@ namespace COTTask_wpf
 
 
             PresentTrial = true;
-            myGrid.Background = brush_BKReady;
+            myGrid.Background = brush_BK;
             while (PresentTrial)
             {
                 circleGo.Visibility = Visibility.Visible;
@@ -486,7 +486,7 @@ namespace COTTask_wpf
 
             circleGo = Utility.Move_Circle_OTopLeft(circleGo, cPoint_Pos_OTopLeft);
             circleGo.Fill = brush_goCircleFill;
-            circleGo.Stroke = brush_goCircleFill;
+            circleGo.Stroke = brush_goCircleOutline;
             circleGo.IsEnabled = false;
             myGrid.UpdateLayout();
         }
@@ -853,6 +853,12 @@ namespace COTTask_wpf
             // goCircle Color
             selectedColor = (Color)(typeof(Colors).GetProperty(parent.targetFillColorStr) as PropertyInfo).GetValue(null, null);
             brush_goCircleFill = new SolidColorBrush(selectedColor);
+
+            selectedColor = (Color)(typeof(Colors).GetProperty(parent.targetOutlineColorStr) as PropertyInfo).GetValue(null, null);
+            brush_goCircleOutline = new SolidColorBrush(selectedColor);
+
+            selectedColor = (Color)(typeof(Colors).GetProperty(parent.BKColorStr) as PropertyInfo).GetValue(null, null);
+            brush_BK = new SolidColorBrush(selectedColor);
 
 
             // Wait Background 

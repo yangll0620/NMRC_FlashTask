@@ -29,7 +29,7 @@ namespace COTTask_wpf
         presentation taskPresentWin;
 
         // Strings stoing the Colors
-        public string targetFillColorStr, targetOutlineColorStr;
+        public string targetFillColorStr, targetOutlineColorStr, BKColorStr;
         public string BKWaitTrialColorStr, BKReadyColorStr, BKTargetShownColorStr;
         public string CorrFillColorStr, CorrOutlineColorStr, ErrorFillColorStr, ErrorOutlineColorStr, ErrorCrossingColorStr;
 
@@ -104,8 +104,18 @@ namespace COTTask_wpf
             {
                 textBox_tmp.Text = "Hot Keys: start - S, Stop - Space";
             }
+
+            BindingColorData();
         }
 
+
+        private void BindingColorData()
+        {
+            //Data binding the Color ComboBoxes
+            cbo_goFillColor.ItemsSource = typeof(Colors).GetProperties();
+            cbo_goOutlineColor.ItemsSource = typeof(Colors).GetProperties();
+            cbo_BKColor.ItemsSource = typeof(Colors).GetProperties();
+        }
 
         private void CheckIO8Connection()
         {
@@ -444,7 +454,6 @@ namespace COTTask_wpf
 
             // Color Sections
             var configColors = config["Colors"];
-            targetFillColorStr = configColors["Target Fill Color"];
             BKWaitTrialColorStr = configColors["Wait Start Background"];
             BKReadyColorStr = configColors["Ready Background"];
             BKTargetShownColorStr = configColors["Target Shown Background"];
@@ -453,6 +462,18 @@ namespace COTTask_wpf
             ErrorFillColorStr = configColors["Error Fill"];
             ErrorOutlineColorStr = configColors["Error Outline"];
             ErrorCrossingColorStr = configColors["Error Crossing"];
+
+
+            targetFillColorStr = configColors["Target Fill"];
+            targetOutlineColorStr = configColors["Target Outline"];
+            BKColorStr = configColors["Background"];
+
+            // Set Default Selected Item
+            cbo_goFillColor.SelectedItem = typeof(Colors).GetProperty(targetFillColorStr);
+            cbo_goOutlineColor.SelectedItem = typeof(Colors).GetProperty(targetOutlineColorStr);
+            cbo_BKColor.SelectedItem = typeof(Colors).GetProperty(BKColorStr);
+
+
 
 
             // Target Sections
@@ -496,7 +517,6 @@ namespace COTTask_wpf
 
             // config Colors
             ConfigColors configColors = new ConfigColors();
-            configColors.targetFillColorStr = targetFillColorStr;
             configColors.BKWaitTrialColorStr = BKWaitTrialColorStr;
             configColors.BKReadyColorStr = BKReadyColorStr;
             configColors.BKTargetShownColorStr = BKTargetShownColorStr;
@@ -505,6 +525,11 @@ namespace COTTask_wpf
             configColors.ErrorFillColorStr = ErrorFillColorStr;
             configColors.ErrorOutlineColorStr = ErrorOutlineColorStr;
             configColors.ErrorCrossingColorStr = ErrorCrossingColorStr;
+
+
+            configColors.targetFillColorStr = (cbo_goFillColor.SelectedItem as PropertyInfo).Name;
+            configColors.targetOutlineColorStr = (cbo_goOutlineColor.SelectedItem as PropertyInfo).Name;
+            configColors.BKColorStr = (cbo_BKColor.SelectedItem as PropertyInfo).Name;
 
 
 
@@ -559,12 +584,21 @@ namespace COTTask_wpf
             // Set btn_Start,  btn_stop and btn_pause
             btn_start.IsEnabled = false;
             btn_stop.IsEnabled = true;
-            btn_pause.IsEnabled = true; 
+            btn_pause.IsEnabled = true;
 
+
+
+            targetFillColorStr = (cbo_goFillColor.SelectedItem as PropertyInfo).Name;
+            targetOutlineColorStr = (cbo_goOutlineColor.SelectedItem as PropertyInfo).Name;
+            BKColorStr = (cbo_BKColor.SelectedItem as PropertyInfo).Name;
 
             textBox_NHPName.IsEnabled=false;
             textBox_tTargetOn.IsEnabled = false;
             textBox_tTargetOff.IsEnabled = false;
+            cbo_goFillColor.IsEnabled=false;
+            cbo_goOutlineColor.IsEnabled=false;
+            cbo_BKColor.IsEnabled=false;
+
 
 
             UninitializeHotKey(HotKeyId_Start);
@@ -612,6 +646,9 @@ namespace COTTask_wpf
             textBox_NHPName.IsEnabled = true;
             textBox_tTargetOn.IsEnabled = true;
             textBox_tTargetOff.IsEnabled = true;
+            cbo_goFillColor.IsEnabled = true;
+            cbo_goOutlineColor.IsEnabled = true;
+            cbo_BKColor.IsEnabled = true;
 
             InitializeHotKey(key_Start, HotKeyId_Start);
             UninitializeHotKey(HotKeyId_Stop);

@@ -71,9 +71,6 @@ namespace COTTask_wpf
 
     class ConfigColors
     {
-        [JsonProperty(PropertyName = "Target Fill Color")]
-        public string targetFillColorStr;
-
         [JsonProperty(PropertyName = "Wait Start Background")]
         public string BKWaitTrialColorStr;
 
@@ -98,5 +95,14 @@ namespace COTTask_wpf
 
         [JsonProperty(PropertyName = "Error Crossing")]
         public string ErrorCrossingColorStr;
+
+        [JsonProperty(PropertyName = "Target Fill")]
+        public string targetFillColorStr;
+
+        [JsonProperty(PropertyName = "Target Outline")]
+        public string targetOutlineColorStr;
+
+        [JsonProperty(PropertyName = "Background")]
+        public string BKColorStr;
     }
 }

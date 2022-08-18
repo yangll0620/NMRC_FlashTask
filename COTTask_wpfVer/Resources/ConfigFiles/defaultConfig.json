@@ -25,7 +25,6 @@
     ]
   },
   "Colors": {
-    "Target Fill Color": "Green",
     "Wait Start Background": "Black",
     "Ready Background": "Blue",
     "Target Shown Background": "WhiteSmoke",
@@ -33,7 +32,10 @@
     "Correct Outline": "Magenta",
     "Error Fill": "WhiteSmoke",
     "Error Outline": "Red",
-    "Error Crossing": "Red"
+    "Error Crossing": "Red",
+    "Target Fill": "Green",
+    "Target Outline": "Green",
+    "Background": "Black"
   },
   "audioFile_Correct": "default",
   "audioFile_Error": "default"

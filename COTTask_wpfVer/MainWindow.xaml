@@ -97,6 +97,8 @@
                         <RowDefinition Height="3*"/>
                     </Grid.RowDefinitions>
 
+
+                    <!--Time Setup (s)-->
                     <Grid Grid.Row="0">
                         <GroupBox Header="Time Setup (s)">
                             <Grid>
@@ -117,23 +119,90 @@
                                                  TextWrapping="Wrap"   FontWeight="Normal" />
                                 </Grid>
                                 <Grid Grid.Column="1">
-                                    <TextBlock Text ="t_TargetOff" Height="25" Margin="0,0,0,0"  FontWeight="Normal" 
-                                                   HorizontalAlignment="Left" VerticalAlignment="Center"  TextAlignment="Right" Padding="3"/>
+                                    <TextBlock Text ="t_TargetOff" Height="25" Margin="0,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center"  
+                                               FontWeight="Normal" TextAlignment="Right" Padding="3"/>
 
-                                    <TextBox x:Name="textBox_tTargetOff"  Height="25" Width="50" Margin="80,0,0,0" 
-                                                 HorizontalAlignment="Left" VerticalAlignment="Center" 
-                                                 HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
-                                                 TextWrapping="Wrap"   FontWeight="Normal" />
+                                    <TextBox x:Name="textBox_tTargetOff"  Height="25" Width="50" Margin="80,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" 
+                                                 HorizontalContentAlignment="Center" VerticalContentAlignment="Center" TextWrapping="Wrap"   FontWeight="Normal" />
                                 </Grid>
                             </Grid>
                         </GroupBox>
 
                     </Grid>
 
+
+                    <!--Color Setup (s)-->
+                    <Grid Grid.Row="1">
+                        <GroupBox Header="Color Setup">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Grid Grid.Column="0">
+                                    <Label Content="Target Fill" Height="25" Margin="0,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center"    
+                                           HorizontalContentAlignment="Right" VerticalContentAlignment="Center" FontWeight="Normal"/>
+                                    
+                                    <ComboBox x:Name="cbo_goFillColor"  Width="120" Height="25" Margin="85,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center"                                          
+                                              VerticalContentAlignment="Center" FontWeight="Normal" >
+                                        <ComboBox.ItemTemplate>
+                                            <DataTemplate>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <Rectangle Fill="{Binding Name}" Width="16" Height="16" Margin="0,2,5,2" />
+                                                    <TextBlock Text="{Binding Name}" />
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </ComboBox.ItemTemplate>
+                                    </ComboBox>
+                                </Grid>
+
+
+                                <Grid Grid.Column="1">
+                                    <Label Content="Target Outline" Height="25" Margin="0,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center"    
+                                           HorizontalContentAlignment="Right" VerticalContentAlignment="Center" FontWeight="Normal"/>
+
+                                    <ComboBox x:Name="cbo_goOutlineColor"  Width="120" Height="25" Margin="85,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center"                                          
+                                              VerticalContentAlignment="Center" FontWeight="Normal" >
+                                        <ComboBox.ItemTemplate>
+                                            <DataTemplate>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <Rectangle Fill="{Binding Name}" Width="16" Height="16" Margin="0,2,5,2" />
+                                                    <TextBlock Text="{Binding Name}" />
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </ComboBox.ItemTemplate>
+                                    </ComboBox>
+                                </Grid>
+
+
+                                <Grid Grid.Column="2">
+                                    <Label Content="Background" Height="25" Margin="0,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center"    
+                                           HorizontalContentAlignment="Right" VerticalContentAlignment="Center" FontWeight="Normal"/>
+
+                                    <ComboBox x:Name="cbo_BKColor"  Width="120" Height="25" Margin="85,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center"                                          
+                                              VerticalContentAlignment="Center" FontWeight="Normal" >
+                                        <ComboBox.ItemTemplate>
+                                            <DataTemplate>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <Rectangle Fill="{Binding Name}" Width="16" Height="16" Margin="0,2,5,2" />
+                                                    <TextBlock Text="{Binding Name}" />
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </ComboBox.ItemTemplate>
+                                    </ComboBox>
+                                </Grid>
+
+                            </Grid>
+
+
+                        </GroupBox>
+
+                    </Grid>
+
                 </Grid>
             </GroupBox>
-
-
 
 
             <Grid Grid.Row="1" Visibility="Hidden">
@@ -153,45 +222,6 @@
                             <RowDefinition Height="2*"/>
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
-
-
-                        <Grid Grid.Row="1">
-                            <GroupBox Header="Color Setup">
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="*"/>
-                                    </Grid.ColumnDefinitions>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="*"/>
-                                        <RowDefinition Height="*"/>
-                                    </Grid.RowDefinitions>
-
-                                    <Label Content="Target Fill" Grid.Row="0" Grid.Column="0" 
-                                           HorizontalAlignment="Right" VerticalAlignment="top" 
-                                           HorizontalContentAlignment="Right" VerticalContentAlignment="Center"
-                                           Height="25" Margin="0,5,135,0"  FontWeight="Normal"/>
-                                    
-                                    <ComboBox x:Name="cbo_goFillColor" Grid.Row="0" Grid.Column="0" 
-                                              HorizontalAlignment="Right" VerticalAlignment="Top" 
-                                              Width="120" Height="25" Margin="0,5,10,0" 
-                                              VerticalContentAlignment="Center" FontWeight="Normal" >
-                                        <ComboBox.ItemTemplate>
-                                            <DataTemplate>
-                                                <StackPanel Orientation="Horizontal">
-                                                    <Rectangle Fill="{Binding Name}" Width="16" Height="16" Margin="0,2,5,2" />
-                                                    <TextBlock Text="{Binding Name}" />
-                                                </StackPanel>
-                                            </DataTemplate>
-                                        </ComboBox.ItemTemplate>
-                                    </ComboBox>
-
-                                </Grid>
-                                
-
-                            </GroupBox>
-
-                        </Grid>
 
                         <Grid Grid.Row="2">
                             <Grid.RowDefinitions>
